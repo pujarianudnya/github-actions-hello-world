@@ -1,17 +1,16 @@
-name: Hello World
+name: Hello World Input Example
 
 on:
-  push:
-    branches:
-      - main  # Runs whenever you push to main branch
-  workflow_dispatch:  # Allows manual trigger from the Actions tab
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Your name'
+        required: true
+        default: 'Friend'
 
 jobs:
-  say-hello:
+  greet:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Say Hello World
-        run: echo "🎉 Hello World from GitHub Actions!"
+      - name: Greet user
+        run: echo "👋 Hello ${{ github.event.inputs.name }} from GitHub Actions!"
